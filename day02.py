@@ -6,20 +6,28 @@ brackets = ranges.split(",")
 #print(brackets)
 total = 0
 total2 = 0
+
 for bracket in brackets:
+    
     start, end = bracket.split("-")
-    #print(start,end)
+
     for i in range(int(start), int(end)+1):
+        
         code = str(i)
-        l = len(code) // 2
-        first = code[:l]
-        second = code[l:]
+        middle = len(code) // 2
+        first = code[:middle]
+        second = code[middle:]
+        
         if first == second:
             total += i
-        le = len(code)
-        for j in range(1,l+1):
+            
+        lenght = len(code)
+        
+        for j in range(1, lenght+1):
+            
             pattern = code[:j]
-            count = le // j
+            count = lenght // j
+            
             if pattern * count == code:
                 total2 += i
                 break
