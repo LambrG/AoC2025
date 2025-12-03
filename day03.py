@@ -1,48 +1,38 @@
 from file import read_data
 
-test = read_data('03test.txt')
-actual = read_data('day03.txt')
-"""
-batteries = actual
-total = 0
-for bank in batteries:
-    cur_max = 0
-    for i,left in enumerate(bank[:-1]):
-        right_bank = bank[i+1:]
-        for right in right_bank:
-            bats = int(left + right)
-            if bats > cur_max:
-                cur_max = bats
-    total += cur_max
-    
-print(total)
-"""    
-batteries = actual #['811384523523527']
-total = 0
-for bank in batteries:
-    #print(len(bank), 'znaku')
-    output = ''
-    curr_i = 0
-    #bank += '0'
-    #print(bank)
-    for idx in range(12):
-        curr_num = '0'
-        end = len(bank[curr_i:])-(11-idx)
-        #print(curr_i,end)       
-        test_string = bank[curr_i:curr_i+end] 
-        #print(test_string)
-        #input()
-        for j,char in enumerate(test_string):
-            if int(char)> int(curr_num):
-                curr_num = char
-                max_j = j
-        output += curr_num
-        curr_i += max_j + 1
+def solve(data, range_size):
+    total = 0
+    for bank in data:
+        result = ''
+        current_index = 0
         
-        #print(';'.join([output,test_string]))
-        #input()
-    total += int(output)
+        for iteration in range(range_size):
+            max_digit = '0'
+            remaining_length = len(bank[current_index:]) - (range_size - 1 - iteration)
+            search_range = bank[current_index:current_index + remaining_length]
+            
+            for position, digit in enumerate(search_range):
+                if int(digit) > int(max_digit):
+                    max_digit = digit
+                    max_position = position
+            
+            result += max_digit
+            current_index += max_position + 1
+        
+        total += int(result)
+    
+    return total
 
-print(total)
+test = read_data('inputs/03test.txt')
+puzzle_input = read_data('inputs/day03.txt')
 
+# Test assertions
+assert solve(test, 2) == 357, f"Part 1 test failed: got {solve(test, 2)}, expected 357"
+assert solve(test, 12) == 3121910778619, f"Part 2 test failed: got {solve(test, 12)}, expected 3121910778619"
+print("All assertions passed!")
 
+# Part 1
+print(solve(puzzle_input, 2))
+
+# Part 2
+print(solve(puzzle_input, 12))

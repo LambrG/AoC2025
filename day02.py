@@ -1,39 +1,43 @@
-#ranges = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"
-with open("day02.txt", "r") as f:
-    ranges = f.read()
-brackets = ranges.split(",")
-
-#print(brackets)
-total = 0
-total2 = 0
-
-for bracket in brackets:
+def process_ranges(file_path):
+    with open(file_path, "r") as f:
+        ranges_text = f.read()
     
-    start, end = bracket.split("-")
-
-    for i in range(int(start), int(end)+1):
-        
-        code = str(i)
-        middle = len(code) // 2
-        first = code[:middle]
-        second = code[middle:]
-        
-        if first == second:
-            total += i
-            
-        lenght = len(code)
-        
-        for j in range(1, lenght+1):
-            
-            pattern = code[:j]
-            count = lenght // j
-            
-            if pattern * count == code:
-                total2 += i
-                break
-            
+    ranges = ranges_text.split(",")
+    total = 0
+    total2 = 0
     
+    for range_pair in ranges:
+        start, end = range_pair.split("-")
+        
+        for number in range(int(start), int(end) + 1):
+            code = str(number)
+            middle = len(code) // 2
+            first_half = code[:middle]
+            second_half = code[middle:]
             
-print(total)
-print(total2)
+            if first_half == second_half:
+                total += number
+            
+            code_length = len(code)
+            
+            for pattern_length in range(1, code_length // 2 + 1):
+                pattern = code[:pattern_length]
+                repetitions = code_length // pattern_length
+                
+                if pattern * repetitions == code:
+                    total2 += number
+                    break
+    
+    return total, total2
 
+
+# Test
+test_total, test_total2 = process_ranges("inputs/02test.txt")
+assert test_total == 1227775554, f"Test part 1 failed: got {test_total}, expected 1227775554"
+assert test_total2 == 4174379265, f"Test part 2 failed: got {test_total2}, expected 4174379265"
+print("All assertions passed!")
+
+# Puzzle input
+result_total, result_total2 = process_ranges("inputs/day02.txt")
+print(result_total)
+print(result_total2)
