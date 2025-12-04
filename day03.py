@@ -23,16 +23,14 @@ def solve(data, range_size):
     
     return total
 
+
 test = read_data('inputs/03test.txt')
 puzzle_input = read_data('inputs/day03.txt')
 
-# Test assertions
 assert solve(test, 2) == 357, f"Part 1 test failed: got {solve(test, 2)}, expected 357"
 assert solve(test, 12) == 3121910778619, f"Part 2 test failed: got {solve(test, 12)}, expected 3121910778619"
 print("All assertions passed!")
 
-# Part 1
 print(solve(puzzle_input, 2))
 
-# Part 2
 print(solve(puzzle_input, 12))

@@ -36,9 +36,7 @@ def solve(data):
     return part1, part2
 
 
-# Test
 assert solve(test) == (3,6), f"Test failed: got {solve(test)}, expected (3,6)"
 print("Test passed!")
 
-# Puzzle input
 print(solve(puzzle_input))

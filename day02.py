@@ -31,13 +31,11 @@ def process_ranges(file_path):
     return total, total2
 
 
-# Test
 test_total, test_total2 = process_ranges("inputs/02test.txt")
 assert test_total == 1227775554, f"Test part 1 failed: got {test_total}, expected 1227775554"
 assert test_total2 == 4174379265, f"Test part 2 failed: got {test_total2}, expected 4174379265"
 print("All assertions passed!")
 
-# Puzzle input
 result_total, result_total2 = process_ranges("inputs/day02.txt")
 print(result_total)
 print(result_total2)
