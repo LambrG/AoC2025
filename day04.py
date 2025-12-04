@@ -14,15 +14,15 @@ def check_around(row,col,warehouse):
     return count - 1
 
 
-def solve1(data):
-    l = len(data[0])
-    
-    warehouse = ['.'*l]
-    warehouse.extend(data)
-    warehouse.append('.'*l)
-    
+def adjust_warehouse(warehouse):
+    l = len(warehouse[0])
+    warehouse = ['.'*l] + warehouse + ['.'*l]    
     warehouse = ['.' + line + '.' for line in warehouse]
-    
+    return warehouse
+
+
+def solve1(data):
+    warehouse = data    
     new_warehouse = [line for line in warehouse]
     total = 0
     
@@ -51,8 +51,8 @@ def solve2(data):
         
 
 if __name__ == "__main__":
-    test = read_data('inputs/04test.txt')
-    actual = read_data('inputs/day04.txt')
+    test = adjust_warehouse(read_data('inputs/04test.txt'))
+    actual = adjust_warehouse(read_data('inputs/day04.txt'))
                 
     assert solve1(test)[0] == 13
     print(solve1(test)[0])

@@ -11,16 +11,15 @@ def process_ranges(file_path):
         
         for number in range(int(start), int(end) + 1):
             code = str(number)
-            middle = len(code) // 2
+            code_length = len(code)            
+            middle = code_length // 2
+
             first_half = code[:middle]
             second_half = code[middle:]
-            
             if first_half == second_half:
                 total += number
             
-            code_length = len(code)
-            
-            for pattern_length in range(1, code_length // 2 + 1):
+            for pattern_length in range(1, middle + 1):
                 pattern = code[:pattern_length]
                 repetitions = code_length // pattern_length
                 
