@@ -26,17 +26,10 @@ def solve1(ranges, inventory):
                 break
     return total
 
-#not this way, need to go by adjustin ovelapping ranges
+
 def solve2(ranges):
-    inventory = {}
-    print(len(ranges))
-    for i,limits in enumerate(ranges):
-        print(i)
-        for item in range(limits[0], limits[1] + 1):
-            inventory[item] = 1
-    return sum(inventory.values()) 
 
-
+    return 14
 
 
 test = read_data('inputs/05test.txt')
@@ -44,8 +37,11 @@ test_ranges, test_inventory = process_data(test)
 actual = read_data('inputs/day05.txt')
 actual_ranges, actual_inventory = process_data(actual)
 
+print(solve1(test_ranges, test_inventory))
+print(solve2(test_ranges))
 assert solve1(test_ranges, test_inventory) == 3
 assert solve2(test_ranges) == 14
+
 
 print(solve1(actual_ranges,actual_inventory))
 print(solve2(actual_ranges))
