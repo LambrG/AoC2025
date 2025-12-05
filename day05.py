@@ -28,8 +28,20 @@ def solve1(ranges, inventory):
 
 
 def solve2(ranges):
-
-    return 14
+    sorted_ranges = sorted(ranges, key=lambda r: r[0])
+    
+    merged = [sorted_ranges[0]]
+    
+    for current in sorted_ranges[1:]:
+        last = merged[-1]
+        if current[0] <= last[1]:
+            merged[-1] = (last[0], max(last[1], current[1]))
+        else:
+            merged.append(current)
+    
+    total = sum(end - start + 1 for start, end in merged)
+    
+    return total
 
 
 test = read_data('inputs/05test.txt')
