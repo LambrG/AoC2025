@@ -2,7 +2,8 @@ from file import read_data, read_data_no_eol
 
 
 def process_data1(data):
-    return list(map(list, zip(*[line.split() for line in data])))
+    math_homework = list(map(list, zip(*[line.split() for line in data])))
+    return math_homework
 
 
 def process_data2(data):
