@@ -1,5 +1,6 @@
 from file import read_data
 
+
 def process_data(file):
     ranges = []
     inventory = []
@@ -57,5 +58,3 @@ assert solve2(test_ranges) == 14
 
 print(solve1(actual_ranges,actual_inventory))
 print(solve2(actual_ranges))
-
-
