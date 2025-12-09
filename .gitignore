@@ -4,3 +4,4 @@ __pycache__/
 *.txt
 inputs/
 test.py
+venv/
