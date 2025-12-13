@@ -1,6 +1,7 @@
 from file import read_data
 import re
 from itertools import product
+import z3
 
 
 def parse_tuple_string(s):
@@ -73,16 +74,24 @@ def solve1(data):
 
 
 def solve2(data):
+
     machines = process_data(data)
     total = 0
     
     for i, machine in enumerate(machines):
         diagram, buttons, joltage = machine
-        target = joltage.copy()
-        
-        presses = find_min_presses_joltage(buttons, target)
-        total += presses
-    
+        o = z3.Optimize()
+        vars = z3.Ints(f"n{j}" for j in range(len(buttons)))
+        for var in vars: o.add(var >= 0)
+        for j, jolt in enumerate(joltage):
+            equation = 0
+            for b, button in enumerate(buttons):
+                if j in button:
+                    equation += vars[b]
+            o.add(equation == jolt)
+        o.minimize(sum(vars))
+        o.check()
+        total += o.model().eval(sum(vars)).as_long()
     return total
 
 
